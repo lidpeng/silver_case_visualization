@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Long Can Silver Prices Continue to Rise? - In-depth Analysis</title>
+  <style>
+/* Silver Price Analysis - Styles */
+:root {
+  --silver: #C0C0C0;
+  --silver-dark: #8B8B8B;
+  --silver-light: #E8E8E8;
+  --gold: #FFD700;
+  --gold-dark: #DAA520;
+  --bg-dark: #1a1a2e;
+  --bg-card: #16213e;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --bullish: #00d26a;
+  --bearish: #ff6b6b;
+  --border: rgba(192, 192, 192, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: linear-gradient(135deg, var(--bg-dark) 0%, #0f0f23 100%);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(26, 26, 46, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 2rem;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--silver);
+}
+
+.logo-icon {
+  font-size: 2rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.3s;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--silver);
+}
+
+/* Main Container */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 6rem 2rem 2rem;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 4rem 0;
+  margin-bottom: 3rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--silver) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero .subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.hero .meta {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Stats Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 40px rgba(192, 192, 192, 0.1);
+}
+
+.stat-card .label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.stat-card .value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--silver);
+}
+
+.stat-card .change {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.stat-card .change.up { color: var(--bullish); }
+.stat-card .change.down { color: var(--bearish); }
+
+/* Section Title */
+.section-title {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Charts Section */
+.charts-section {
+  margin-bottom: 3rem;
+}
+
+.charts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 1.5rem;
+}
+
+.chart-card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.chart-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--silver-light);
+}
+
+.chart-container {
+  position: relative;
+  height: 300px;
+}
+
+/* Debate Section */
+.debate-section {
+  margin-bottom: 3rem;
+}
+
+.debate-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.debate-tab {
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s;
+  background: var(--bg-card);
+  color: var(--text-secondary);
+}
+
+.debate-tab.bullish:hover, .debate-tab.bullish.active {
+  background: var(--bullish);
+  color: white;
+}
+
+.debate-tab.bearish:hover, .debate-tab.bearish.active {
+  background: var(--bearish);
+  color: white;
+}
+
+.debate-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.debate-panel {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  display: none;
+}
+
+.debate-panel.active {
+  display: block;
+}
+
+.debate-panel.full-width {
+  grid-column: 1 / -1;
+}
+
+.debate-panel h3 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.debate-panel.bullish h3 { color: var(--bullish); }
+.debate-panel.bearish h3 { color: var(--bearish); }
+
+.argument-list {
+  list-style: none;
+}
+
+.argument-list li {
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background: rgba(255,255,255,0.03);
+  border-radius: 8px;
+  border-left: 3px solid;
+}
+
+.argument-list.bullish li { border-color: var(--bullish); }
+.argument-list.bearish li { border-color: var(--bearish); }
+
+.argument-list li strong {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* Article Section */
+.article-section {
+  margin-bottom: 3rem;
+}
+
+.article-content {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.article-content h2 {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+  color: var(--silver);
+}
+
+.article-content h3 {
+  font-size: 1.25rem;
+  margin: 1.5rem 0 0.75rem;
+  color: var(--silver-light);
+}
+
+.article-content p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.article-content ul, .article-content ol {
+  margin: 1rem 0 1rem 1.5rem;
+  color: var(--text-secondary);
+}
+
+.article-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.article-content th, .article-content td {
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  text-align: left;
+}
+
+.article-content th {
+  background: rgba(192, 192, 192, 0.1);
+  color: var(--silver);
+}
+
+/* Sources Section */
+.sources-section {
+  margin-bottom: 3rem;
+}
+
+.sources-list {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+}
+
+.sources-list ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 0.5rem;
+}
+
+.sources-list li {
+  padding: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.sources-list li::before {
+  content: "📊 ";
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.disclaimer {
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid var(--bearish);
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--bearish);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2rem; }
+  .nav-links { display: none; }
+  .charts-grid { grid-template-columns: 1fr; }
+  .debate-content { grid-template-columns: 1fr; }
+  .container { padding: 5rem 1rem 1rem; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--silver-dark);
+  border-radius: 4px;
+}
+
+</style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-content">
+      <div class="logo">
+        <span class="logo-icon">🪙</span>
+        <span>Silver Analysis</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#overview" class="active">Overview</a></li>
+        <li><a href="#charts">Data Charts</a></li>
+        <li><a href="#debate">Bull-Bear Debate</a></li>
+        <li><a href="#article">Full Report</a></li>
+        <li><a href="#sources">Data Sources</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Hero Section -->
+    <section id="overview" class="hero">
+      <h1>How Long Can Silver Prices Continue to Rise?</h1>
+      <p class="subtitle">In-depth Supply-Demand and Macro Game Analysis — Multi-perspective Research Based on Objective Data, Bullish and Bearish Views</p>
+      <p class="meta">📅 February 12, 2026 | 📊 In-depth Report</p>
+    </section>
+
+    <!-- Key Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="label">COMEX Silver Futures</div>
+        <div class="value" id="currentPrice">$82.30</div>
+        <div class="change down" id="priceChange">-2.12%</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">2026 Supply Deficit</div>
+        <div class="value" id="deficit">67M oz</div>
+        <div class="change" id="deficitYears">6 Years in a Row</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Gold-Silver Ratio</div>
+        <div class="value" id="goldSilverRatio">60:1</div>
+        <div class="change">Historical Avg: 59:1</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">Inventory Coverage</div>
+        <div class="value" id="inventoryCoverage">14%</div>
+        <div class="change down">Extremely Dangerous</div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <section id="charts" class="charts-section">
+      <h2 class="section-title">📈 Key Data Visualization</h2>
+      <div class="charts-grid">
+        <div class="chart-card">
+          <h3>Silver Price Trend (USD/oz)</h3>
+          <div class="chart-container">
+            <canvas id="priceChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>Supply Deficit Trend (M oz)</h3>
+          <div class="chart-container">
+            <canvas id="deficitChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>Demand Structure</h3>
+          <div class="chart-container">
+            <canvas id="demandChart"></canvas>
+          </div>
+        </div>
+        <div class="chart-card">
+          <h3>Gold-Silver Ratio Change</h3>
+          <div class="chart-container">
+            <canvas id="ratioChart"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bull-Bear Debate -->
+    <section id="debate" class="debate-section">
+      <h2 class="section-title">⚔️ Bull-Bear Debate</h2>
+      <div class="debate-tabs">
+        <button class="debate-tab active" data-target="all">All Views</button>
+        <button class="debate-tab bullish" data-target="bullish">📈 Bullish Camp</button>
+        <button class="debate-tab bearish" data-target="bearish">📉 Bearish Camp</button>
+      </div>
+      <div class="debate-content">
+        <div class="debate-panel bullish active">
+          <h3>🐂 Bullish Arguments</h3>
+          <ul class="argument-list bullish" id="bullishArguments"></ul>
+        </div>
+        <div class="debate-panel bearish active">
+          <h3>🐻 Bearish Arguments</h3>
+          <ul class="argument-list bearish" id="bearishArguments"></ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full Article -->
+    <section id="article" class="article-section">
+      <h2 class="section-title">📄 Full Analysis Report</h2>
+      <div class="article-content">
+        <h2>1. Introduction: The Silver Frenzy and Investors' Dilemma</h2>
+        <p>The beginning of 2026 is destined to be recorded in the history of the global precious metals market. In January, silver — the long-dormant "poor man's gold" — suddenly shed its gentle facade and staged a heart-stopping roller coaster ride.</p>
+        <p>From a steady climb at the start of the year to a short-squeeze-like surge at the end of January, COMEX silver futures prices once touched a jaw-dropping historical high of <strong>$120/oz</strong>, only to plunge by half in just a few days to around $75, finally stabilizing in the $80-85 range by mid-February.</p>
+
+        <h2>2. Objective Data: The Harsh Reality Behind the Clamor</h2>
+        <h3>2.1 Price Trend</h3>
+        <p>Looking back over the past five years, silver has traced a clear recovery curve and entered an acceleration phase in 2025-2026:</p>
+        <ul>
+          <li><strong>Dormancy Period (2018-2022)</strong>: Silver prices mainly oscillated in the $15-25 range</li>
+          <li><strong>Launch Period (2023-2024)</strong>: Photovoltaic demand explosion, breaking through the $30 threshold</li>
+          <li><strong>Explosion Period (2025)</strong>: Surged 148% for the year, breaking the $50 historical high</li>
+          <li><strong>Frenzy Period (Early 2026)</strong>: Set an intraday record of $120 before a sharp correction</li>
+        </ul>
+
+        <h3>2.2 Supply-Demand Fundamentals</h3>
+        <table>
+          <tr><th>Indicator</th><th>Value</th><th>Status</th></tr>
+          <tr><td>Global Total Supply</td><td>1.05B oz</td><td>Slight Increase</td></tr>
+          <tr><td>Global Total Demand</td><td>1.17B oz</td><td>Strong</td></tr>
+          <tr><td>Supply Deficit</td><td>-67M oz</td><td>Severe Shortage</td></tr>
+          <tr><td>Inventory Coverage</td><td>14%</td><td>Extremely Dangerous</td></tr>
+          <tr><td>Industrial Demand %</td><td>~60%</td><td>Dominant</td></tr>
+        </table>
+
+        <h2>3. Core Divergence in the Bull-Bear Game</h2>
+        <p><strong>Bullish View:</strong> The supply-demand gap cannot be resolved, industrial demand is irreversible, inventory depletion will trigger larger-scale short squeezes, $120 was just a rehearsal.</p>
+        <p><strong>Bearish View:</strong> This is a典型的投机泡沫，经济衰退将扼杀工业需求，技术替代正在加速，银价将重回30美元。</p>
+
+        <h2>4. Investment Insights</h2>
+        <h3>Scenario Analysis</h3>
+        <ul>
+          <li><strong>Scenario A (40% probability):</strong> Soft landing → Silver price oscillates in $60-90 range</li>
+          <li><strong>Scenario B (30% probability):</strong> Stagflation → Silver price may break through $150</li>
+          <li><strong>Scenario C (30% probability):</strong> Deep recession → Silver price may plunge to $40-50</li>
+        </ul>
+
+        <h3>Risk Signals</h3>
+        <ul>
+          <li>Watch for CME rule changes (increased margin requirements)</li>
+          <li>Monitor USD rebound (breaking 105 puts pressure on silver)</li>
+          <li>Don't use high leverage (30% intraday volatility is enough for liquidation)</li>
+        </ul>
+
+        <h2>5. Conclusion</h2>
+        <p>How long can silver prices continue to rise? The answer may not depend on silver itself, but on what kind of era we are in.</p>
+        <p><strong>Short-term</strong>, due to excessive prior gains, abundant profit-taking, and macroeconomic uncertainty, silver faces risks of sharp correction and volatility.</p>
+        <p><strong>Medium-term</strong> (1-3 years), as long as global inventory cannot be substantially replenished and substitute technologies have not been widely adopted, the core contradiction of the supply-demand gap cannot be resolved. This determines that silver's bottom will continue to rise.</p>
+        <p style="color: var(--gold); font-weight: bold;">Silver is both a devil and an angel. It can make you rich overnight, or wipe you out in an instant. Only by respecting the market and controlling leverage can you emerge unscathed from this century-long game.</p>
+      </div>
+    </section>
+
+    <!-- Data Sources -->
+    <section id="sources" class="sources-section">
+      <h2 class="section-title">📚 Data Sources</h2>
+      <div class="sources-list">
+        <ul>
+          <li>Silver Institute: World Silver Survey 2025 & 2026 Outlook</li>
+          <li>USGS: Mineral Commodity Summaries 2025</li>
+          <li>COMEX & LBMA Inventory Data (Feb 2026)</li>
+          <li>J.P. Morgan / Citi / Goldman Sachs Research Reports</li>
+          <li>Metals Focus Supply/Demand Analysis</li>
+          <li>Market News and Financial Media</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="disclaimer">
+        ⚠️ Disclaimer: This page is for reference only and does not constitute specific investment advice. Markets are risky, invest with caution.
+      </div>
+      <p>© 2026 Silver Price In-depth Analysis | Data Updated: February 12, 2026</p>
+    </footer>
+  </div>
+
+  <script>
+// Silver Price Analysis - Main Logic
+
+// Data Definitions
+const silverData = {
+  // Current Price Data
+  currentPrice: {
+    usd: 82.30,
+    cny: 20.24,
+    change24h: -2.12,
+    high52w: 120.00,
+    low52w: 25.68
+  },
+
+  // Supply-Demand Data
+  supplyDemand: {
+    totalSupply: 10.5, // Billion oz
+    totalDemand: 11.17,
+    deficit: -0.67, // Billion oz
+    deficitYears: 6
+  },
+
+  // Gold-Silver Ratio
+  goldSilverRatio: 60,
+
+  // Inventory Coverage
+  inventoryCoverage: 14,
+
+  // Price History (Annual)
+  priceHistory: {
+    labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+    cny: [3.25, 4.20, 5.00, 5.50, 4.50, 6.00, 7.00, 12.00, 20.24],
+    usd: [15.5, 18.0, 24.0, 25.0, 21.0, 24.0, 28.0, 50.0, 82.30]
+  },
+
+  // Deficit History
+  deficitHistory: {
+    labels: ['2021', '2022', '2023', '2024', '2025', '2026(E)'],
+    values: [-51, -58, -62, -65, -117, -67] // Million oz
+  },
+
+  // Demand Structure
+  demandStructure: {
+    labels: ['Industrial', 'Jewelry', 'Investment', 'ETF'],
+    values: [59, 18, 16, 7],
+    colors: ['#4ECDC4', '#FFE66D', '#95E1D3', '#F38181']
+  },
+
+  // Gold-Silver Ratio History
+  ratioHistory: {
+    labels: ['2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+    values: [100, 70, 80, 75, 70, 55, 60]
+  }
+};
+
+// Bullish Arguments
+const bullishArguments = [
+  {
+    title: "Irreversible Supply Shortage",
+    content: "Structural deficit for 6 consecutive years, with an estimated gap of 67M oz in 2026. 75% of global silver is a by-product, and supply is extremely insensitive to price."
+  },
+  {
+    title: "Industrial Demand Explosion",
+    content: "Photovoltaic silver consumption exceeds 8,000 tons/year, N-type battery unit silver content increases by 30%-100%. AI servers contain 1.2kg silver each, NEVs use 7x more silver than combustion vehicles."
+  },
+  {
+    title: "Inventory Depletion Triggers Short Squeeze",
+    content: "COMEX inventory coverage is only 14%, down 70% from 2020 peak. London spot has seen unprecedented premiums, physical supply is extremely tight."
+  },
+  {
+    title: "Gold-Silver Ratio Mean Reversion",
+    content: "Historical gold-silver ratio averages around 60:1, can reach 30:1 in extremes. If gold maintains $5000, at 40:1 silver could reach $125."
+  },
+  {
+    title: "Institutional Consensus Bullish",
+    content: "Citi target price $150 (3 months), former Goldman director predicts $150-180 (year-end), BofA extreme scenario sees $170."
+  }
+];
+
+// Bearish Arguments
+const bearishArguments = [
+  {
+    title: "Economic Recession Kills Demand",
+    content: "Silver is 60% industrial, recession will lead to factory shutdowns and delayed photovoltaic installations. During 2018 trade war, silver fell 9.3% for the year."
+  },
+  {
+    title: "Technology Substitution Accelerating",
+    content: "Copper electroplating and silver-clad copper technologies are under development, expected for large-scale commercialization in 2027-2028. Silver price of 23,000 yuan/kg is approaching industry tolerance limit."
+  },
+  {
+    title: "Speculative Bubble Risk",
+    content: "Silver volatility once exceeded 1800%, CME raised margins multiple times. ETF holdings exceed 40%, highly unanimous market sentiment can trigger avalanche-like selling."
+  },
+  {
+    title: "Historical Bubble Lessons",
+    content: "After 1980 Hunt brothers event, plunged 78% in 3 months, after 2011 peak had significant correction. Current trend eerily similar to pre-2011 bubble burst."
+  },
+  {
+    title: "Federal Reserve Policy Risk",
+    content: "If Fed stops cutting rates or restarts hikes, will directly shatter precious metals' monetary premium. Stronger USD directly pressures dollar-denominated silver."
+  }
+];
+
+// Initialize Charts
+let priceChart, deficitChart, demandChart, ratioChart;
+
+function initCharts() {
+  // Price Trend Chart
+  const priceCtx = document.getElementById('priceChart').getContext('2d');
+  priceChart = new Chart(priceCtx, {
+    type: 'line',
+    data: {
+      labels: silverData.priceHistory.labels,
+      datasets: [{
+        label: 'USD/oz',
+        data: silverData.priceHistory.usd,
+        borderColor: '#C0C0C0',
+        backgroundColor: 'rgba(192, 192, 192, 0.1)',
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        y: {
+          grid: { color: 'rgba(255,255,255,0.1)' },
+          ticks: { color: '#a0a0a0' }
+        },
+        x: {
+          grid: { color: 'rgba(255,255,255,0.1)' },
+          ticks: { color: '#a0a0a0' }
+        }
+      }
+    }
+  });
+
+  // Deficit Chart
+  const deficitCtx = document.getElementById('deficitChart').getContext('2d');
+  deficitChart = new Chart(deficitCtx, {
+    type: 'bar',
+    data: {
+      labels: silverData.deficitHistory.labels,
+      datasets: [{
+        label: 'Supply Deficit (M oz)',
+        data: silverData.deficitHistory.values,
+        backgroundColor: '#ff6b6b',
+        borderRadius: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        y: {
+          grid: { color: 'rgba(255,255,255,0.1)' },
+          ticks: { color: '#a0a0a0' }
+        },
+        x: {
+          grid: { display: false },
+          ticks: { color: '#a0a0a0' }
+        }
+      }
+    }
+  });
+
+  // Demand Structure Pie Chart
+  const demandCtx = document.getElementById('demandChart').getContext('2d');
+  demandChart = new Chart(demandCtx, {
+    type: 'doughnut',
+    data: {
+      labels: silverData.demandStructure.labels,
+      datasets: [{
+        data: silverData.demandStructure.values,
+        backgroundColor: silverData.demandStructure.colors,
+        borderWidth: 0
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'right',
+          labels: { color: '#a0a0a0' }
+        }
+      }
+    }
+  });
+
+  // Gold-Silver Ratio Chart
+  const ratioCtx = document.getElementById('ratioChart').getContext('2d');
+  ratioChart = new Chart(ratioCtx, {
+    type: 'line',
+    data: {
+      labels: silverData.ratioHistory.labels,
+      datasets: [{
+        label: 'Gold-Silver Ratio',
+        data: silverData.ratioHistory.values,
+        borderColor: '#FFD700',
+        backgroundColor: 'rgba(255, 215, 0, 0.1)',
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false }
+      },
+      scales: {
+        y: {
+          grid: { color: 'rgba(255,255,255,0.1)' },
+          ticks: { color: '#a0a0a0' }
+        },
+        x: {
+          grid: { color: 'rgba(255,255,255,0.1)' },
+          ticks: { color: '#a0a0a0' }
+        }
+      }
+    }
+  });
+}
+
+// Render Arguments
+function renderArguments() {
+  const bullishList = document.getElementById('bullishArguments');
+  const bearishList = document.getElementById('bearishArguments');
+
+  bullishList.innerHTML = bullishArguments.map(arg => `
+    <li>
+      <strong>📈 ${arg.title}</strong>
+      ${arg.content}
+    </li>
+  `).join('');
+
+  bearishList.innerHTML = bearishArguments.map(arg => `
+    <li>
+      <strong>📉 ${arg.title}</strong>
+      ${arg.content}
+    </li>
+  `).join('');
+}
+
+// Debate Tab Switching
+function initDebateTabs() {
+  const tabs = document.querySelectorAll('.debate-tab');
+  const panels = document.querySelectorAll('.debate-panel');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.target;
+
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      panels.forEach(panel => {
+        if (target === 'all') {
+          panel.classList.add('active');
+          panel.classList.remove('full-width');
+        } else if (panel.classList.contains(target)) {
+          panel.classList.add('active');
+          panel.classList.add('full-width');
+        } else {
+          panel.classList.remove('active');
+        }
+      });
+    });
+  });
+}
+
+// Smooth Scroll
+function initSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+}
+
+// Navigation Highlight
+function initNavHighlight() {
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const sectionTop = section.offsetTop;
+      if (window.scrollY >= sectionTop - 200) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
+}
+
+// Update Stats
+function updateStats() {
+  document.getElementById('currentPrice').textContent = `$${silverData.currentPrice.usd}`;
+  document.getElementById('priceChange').textContent = `${silverData.currentPrice.change24h}%`;
+  document.getElementById('priceChange').className = 'change ' + (silverData.currentPrice.change24h >= 0 ? 'up' : 'down');
+
+  document.getElementById('deficit').textContent = `${Math.abs(silverData.supplyDemand.deficit * 100)}M oz`;
+  document.getElementById('deficitYears').textContent = `${silverData.supplyDemand.deficitYears} Years in a Row`;
+
+  document.getElementById('goldSilverRatio').textContent = `${silverData.goldSilverRatio}:1`;
+  document.getElementById('inventoryCoverage').textContent = `${silverData.inventoryCoverage}%`;
+}
+
+// Page Load Initialization
+document.addEventListener('DOMContentLoaded', () => {
+  updateStats();
+  initCharts();
+  renderArguments();
+  initDebateTabs();
+  initSmoothScroll();
+  initNavHighlight();
+});
+
+</script>
+</body>
+</html>

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OpenClaw Swarm - 白银价格分析案例</title>
   <link rel="stylesheet" href="styles.css">
+  <script src="i18n.js"></script>
 </head>
 <body>
   <div class="main-container">
@@ -137,6 +138,10 @@
         <div class="preview-header">
           <h3>🌐 生成网页预览</h3>
           <div class="preview-controls">
+            <div class="language-switcher">
+              <button class="lang-btn" data-lang="zh" onclick="switchLanguage('zh')">中文</button>
+              <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">English</button>
+            </div>
             <button class="control-btn" onclick="refreshPreview()">🔄 刷新</button>
             <button class="control-btn" onclick="openInNewTab()">🔗 新标签打开</button>
           </div>

@@ -1,5 +1,10 @@
-// 对话数据
-const chatData = [
+// 获取对话数据
+function getChatData() {
+  return t('chatData');
+}
+
+// 对话数据(保留用于后向兼容,但将被 getChatData() 替代)
+const chatData_OLD = [
   {
     type: 'user',
     sender: 'orange',
@@ -162,6 +167,7 @@ function initChat() {
   const chatMessages = document.getElementById('chatMessages');
   chatMessages.innerHTML = '';
 
+  const chatData = getChatData();
   chatData.forEach((msg, index) => {
     setTimeout(() => {
       const messageEl = createMessageElement(msg);
@@ -393,11 +399,112 @@ function refreshPreview() {
 
 // 在新标签打开
 function openInNewTab() {
-  window.open('silver-analysis-preview.html', '_blank');
+  const lang = getCurrentLanguage();
+  window.open(`silver-analysis-preview${lang === 'en' ? '-en' : ''}.html`, '_blank');
+}
+
+// 更新页面文本
+function updatePageText() {
+  // 更新标题
+  document.title = t('pageTitle');
+
+  // 更新聊天标题和信息
+  const chatTitle = document.querySelector('.chat-header h2');
+  if (chatTitle) chatTitle.textContent = t('chatTitle');
+
+  const chatInfo = document.querySelector('.chat-info');
+  if (chatInfo) chatInfo.textContent = t('chatInfo');
+
+  // 更新蜂群标题
+  const swarmTitle = document.querySelector('.swarm-header h3');
+  if (swarmTitle) swarmTitle.textContent = t('swarmTitle');
+
+  // 更新预览标题
+  const previewTitle = document.querySelector('.preview-header h3');
+  if (previewTitle) previewTitle.textContent = t('previewTitle');
+
+  // 更新按钮文本
+  const btnRefresh = document.querySelector('.control-btn:first-child');
+  if (btnRefresh) btnRefresh.textContent = t('btnRefresh');
+
+  const btnNewTab = document.querySelector('.control-btn:last-child');
+  if (btnNewTab) btnNewTab.textContent = t('btnNewTab');
+
+  // 更新工作流阶段
+  const stageTitles = document.querySelectorAll('.stage-title');
+  if (stageTitles[0]) stageTitles[0].textContent = t('stageAnalysis');
+  if (stageTitles[1]) stageTitles[1].textContent = t('stageDecompose');
+  if (stageTitles[2]) stageTitles[2].textContent = t('stageResearch');
+  if (stageTitles[3]) stageTitles[3].textContent = t('stageWriting');
+  if (stageTitles[4]) stageTitles[4].textContent = t('stageReview');
+  if (stageTitles[5]) stageTitles[5].textContent = t('stageDevelopment');
+
+  // 更新智能体名称和任务
+  const agentNames = document.querySelectorAll('.agent-name');
+  const agentTasks = document.querySelectorAll('.agent-task');
+  const agentStatus = document.querySelectorAll('.agent-status');
+
+  // 阶段0: 主智能体分析
+  if (agentNames[0]) agentNames[0].textContent = t('agentMain');
+  if (agentTasks[0]) agentTasks[0].textContent = t('taskAnalyze');
+  if (agentStatus[0]) agentStatus[0].textContent = t('statusCompleted');
+
+  // 阶段1: 主智能体拆解
+  if (agentNames[1]) agentNames[1].textContent = t('agentMain');
+  if (agentTasks[1]) agentTasks[1].textContent = t('taskDecompose');
+  if (agentStatus[1]) agentStatus[1].textContent = t('statusCompleted');
+
+  // 阶段2: 并行调研
+  if (agentNames[2]) agentNames[2].textContent = t('agentResearcher') + ' #1';
+  if (agentTasks[2]) agentTasks[2].textContent = t('taskObjectiveData');
+  if (agentStatus[2]) agentStatus[2].textContent = t('statusTime3Min');
+
+  if (agentNames[3]) agentNames[3].textContent = t('agentResearcher') + ' #2';
+  if (agentTasks[3]) agentTasks[3].textContent = t('taskBullishView');
+  if (agentStatus[3]) agentStatus[3].textContent = t('statusTime3Min');
+
+  if (agentNames[4]) agentNames[4].textContent = t('agentResearcher') + ' #3';
+  if (agentTasks[4]) agentTasks[4].textContent = t('taskBearishView');
+  if (agentStatus[4]) agentStatus[4].textContent = t('statusTime3Min');
+
+  // 阶段3: 撰写
+  if (agentNames[5]) agentNames[5].textContent = t('agentWriter');
+  if (agentTasks[5]) agentTasks[5].textContent = t('taskWriting');
+  if (agentStatus[5]) agentStatus[5].textContent = t('statusTime2Min');
+
+  // 阶段4: 审核
+  if (agentNames[6]) agentNames[6].textContent = t('agentReviewer');
+  if (agentTasks[6]) agentTasks[6].textContent = t('taskReview');
+  if (agentStatus[6]) agentStatus[6].textContent = t('statusTime1Min');
+
+  // 阶段5: 开发
+  if (agentNames[7]) agentNames[7].textContent = t('agentCoder');
+  if (agentTasks[7]) agentTasks[7].textContent = t('taskDevelopment');
+  if (agentStatus[7]) agentStatus[7].textContent = t('statusTime10Min');
+
+  // 重新加载聊天消息
+  initChat();
+}
+
+// 切换语言
+function switchLanguage(lang) {
+  setLanguage(lang);
+  updatePageText();
+
+  // 更新语言切换按钮状态
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+  });
+  document.querySelector(`.lang-btn[data-lang="${lang}"]`).classList.add('active');
 }
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', () => {
-  initChat();
+  // 设置当前语言按钮状态
+  const currentLang = getCurrentLanguage();
+  document.querySelector(`.lang-btn[data-lang="${currentLang}"]`).classList.add('active');
+
+  // 更新页面文本
+  updatePageText();
   initWorkflowInteraction();
 });
