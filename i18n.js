@@ -256,7 +256,7 @@ const i18nData = {
     // Sender names
     senderUser: 'orange',
     senderAgent: 'Agent Swarm',
-    senderModerator: 'Adventure Xiao Li',
+    senderModerator: 'Moderator',
 
     // Chat data
     chatData: [
@@ -294,7 +294,7 @@ Now dispatching three parallel research tasks for phase 1.`
       },
       {
         type: 'agent',
-        sender: 'Adventure Xiao Li',
+        sender: 'Moderator',
         time: 'Feb 12, 2026 09:33',
         content: `Dispatched 3 researcher agents for parallel research:
 
